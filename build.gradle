@@ -60,7 +60,7 @@ applicationDefaultJvmArgs = [
 ]
 
 // mainClassName = 'co.paralleluniverse.kotlin.actors1.PingPongKt'
-mainClassName = 'co.paralleluniverse.kotlin.actors2.PingPongWithDeferKt'
+mainClassName = 'no.sollid.kotlin.actor.AreaActor'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'

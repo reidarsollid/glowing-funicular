@@ -3,6 +3,7 @@ import co.paralleluniverse.fibers.Suspendable
 import co.paralleluniverse.kotlin.Actor
 import co.paralleluniverse.kotlin.register
 import co.paralleluniverse.kotlin.spawn
+import no.sollid.kotlin.actor.End
 import java.util.concurrent.TimeUnit
 
 data class Msg(val txt: String)
