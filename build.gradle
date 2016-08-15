@@ -59,8 +59,8 @@ applicationDefaultJvmArgs = [
     "-javaagent:${configurations.quasar.singleFile}" // =v, =d
 ]
 
-// mainClassName = 'co.paralleluniverse.kotlin.actors1.PingPongKt'
-mainClassName = 'no.sollid.kotlin.actor.AreaActor'
+//mainClassName = 'KotlinActorKt'
+mainClassName = 'no.sollid.kotlin.actor.AreaActorKt'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'
