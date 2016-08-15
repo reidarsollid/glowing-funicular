@@ -1,0 +1,69 @@
+group 'no.inmeta.kotlin.akka'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlinVer = '1.0.2'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceCompatibility = 1.8     // 1.7
+targetCompatibility = 1.8     // 1.7
+
+configurations {
+    quasar
+}
+
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+    }
+}
+
+repositories {
+//    mavenLocal()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/releases" }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+//    maven { url 'https://maven.java.net/content/repositories/snapshots' }
+}
+
+ext.classifier = ':jdk8' // ':'
+
+ext.quasarVer  = '0.7.6'
+
+dependencies {
+    compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVer"
+    compile "co.paralleluniverse:quasar-kotlin:${quasarVer}"
+
+    quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+}
+
+applicationDefaultJvmArgs = [
+    "-Dco.paralleluniverse.fibers.verifyInstrumentation=true",
+    "-Dco.paralleluniverse.fibers.detectRunawayFibers=false",
+    "-javaagent:${configurations.quasar.singleFile}" // =v, =d
+]
+
+// mainClassName = 'co.paralleluniverse.kotlin.actors1.PingPongKt'
+mainClassName = 'co.paralleluniverse.kotlin.actors2.PingPongWithDeferKt'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
+
+defaultTasks 'run'
